@@ -1,12 +1,8 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         JFrame ventana = new JFrame();
         ventana.setBounds(0, 0, 1600, 900);
         ventana.setLocationRelativeTo(null);
