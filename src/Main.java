@@ -1,5 +1,7 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,37 +22,46 @@ public class Main {
 
         ventana.setJMenuBar(menuBar);
 
+        JPanel buttonsLayout = new JPanel(new GridBagLayout());
+        buttonsLayout.setPreferredSize(new Dimension(400, 900));
+        buttonsLayout.setBorder(BorderFactory.createMatteBorder(0,0,0,1, Color.BLACK));
+        GridBagConstraints bConst = new GridBagConstraints();
+        bConst.fill = GridBagConstraints.HORIZONTAL;
+        bConst.ipadx = 100;
+        bConst.ipady = 50;
+        bConst.insets = new Insets(0, 0, 50, 0);
+
         // Botón nueva liga
-        JButton newLiga = new JButton();
-        newLiga.setText("Nueva Liga");
-        newLiga.setBounds(100, 100, 200, 50);
+        JButton newLiga = new JButton("Nueva Liga");
         newLiga.setFocusPainted(false);
+        bConst.gridy = 0;
+        buttonsLayout.add(newLiga, bConst);
 
         // Botón jugar liga
-        JButton play = new JButton();
-        play.setText("Jugar Liga");
-        play.setBounds(100, 200, 200, 50);
+        JButton play = new JButton("Jugar Liga");
         play.setFocusPainted(false);
+        bConst.gridy = 1;
+        buttonsLayout.add(play, bConst);
 
         // Botón siguiente jornada
-        JButton nextJourney = new JButton();
-        nextJourney.setText("Siguiente jornada");
-        nextJourney.setBounds(100, 300, 200, 50);
+        JButton nextJourney = new JButton("Siguiente jornada");
         nextJourney.setEnabled(false);
         nextJourney.setFocusPainted(false);
+        bConst.gridy = 2;
+        buttonsLayout.add(nextJourney, bConst);
 
         // Botón simulación completa
-        JButton completeSimulation = new JButton();
-        completeSimulation.setText("Simulación completa");
-        completeSimulation.setBounds(100, 400, 200, 50);
+        JButton completeSimulation = new JButton("Simulación completa");
         completeSimulation.setEnabled(false);
         completeSimulation.setFocusPainted(false);
+        bConst.gridy = 3;
+        buttonsLayout.add(completeSimulation, bConst);
 
         // Botón salir
-        JButton exit = new JButton();
-        exit.setText("Salir");
-        exit.setBounds(100, 700, 200, 50);
+        JButton exit = new JButton("Salir");
         exit.setFocusPainted(false);
+        bConst.gridy = 5;
+        buttonsLayout.add(exit, bConst);
 
         String[] columnNames = {"Posición", "Equipo", "Partidos Ganados", "Partidos Perdidos", "Goles a Favor", "Goles en Contra", "Diferencia de Goles"};
         Object[][] data = {
@@ -68,20 +79,21 @@ public class Main {
                 {12, "Jijantes FC", 1, 10, 23, 41, -18}
         };
 
+        JPanel tableLayout = new JPanel();
+        tableLayout.setLayout(new BoxLayout(tableLayout, BoxLayout.Y_AXIS));
+        tableLayout.setBorder(BorderFactory.createEmptyBorder(100,100,20,100));
+
         JTable clasification = new JTable(data, columnNames);
-        clasification.setBounds(500, 60, 1000, 700);
+        clasification.setBorder(BorderFactory.createMatteBorder(0,1,1,1, Color.BLACK));
 
         JTableHeader headers = clasification.getTableHeader();
-        headers.setBounds(500, 40, 1000, 20);
+        headers.setBorder(BorderFactory.createMatteBorder(1,1,0,1, Color.BLACK));
 
-        ventana.setLayout(null);
-        ventana.add(newLiga);
-        ventana.add(play);
-        ventana.add(nextJourney);
-        ventana.add(completeSimulation);
-        ventana.add(exit);
-        ventana.add(headers);
-        ventana.add(clasification);
+        tableLayout.add(headers);
+        tableLayout.add(clasification);
+
+        ventana.add(buttonsLayout, BorderLayout.LINE_START);
+        ventana.add(tableLayout, BorderLayout.CENTER);
 
         ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ventana.setVisible(true);
