@@ -23,6 +23,23 @@ public class Main {
         menu = new JMenu("Ayuda");
         menuBar.add(menu);
 
+        JMenuItem version = new JMenuItem("Versión");
+        version.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Versión 1.0");
+            }
+        });
+        menu.add(version);
+        JMenuItem acerca = new JMenuItem("Acerca de");
+        acerca.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Programa para la creación y simulación de ligas deportivas.");
+            }
+        });
+        menu.add(acerca);
+
         ventana.setJMenuBar(menuBar);
 
         JPanel buttonsLayout = new JPanel(new GridBagLayout());
