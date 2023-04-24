@@ -1,9 +1,10 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,40 +35,34 @@ public class Main {
         bConst.insets = new Insets(0, 0, 50, 0);
 
         // Botón nueva liga
-        JButton newLiga = new JButton("Nueva Liga");
+        Boton newLiga = new Boton("Nueva Liga", 1);
         newLiga.setFocusPainted(false);
         bConst.gridy = 0;
         buttonsLayout.add(newLiga, bConst);
 
         // Botón jugar liga
-        JButton play = new JButton("Jugar Liga");
+        Boton play = new Boton("Jugar Liga", 2);
         play.setFocusPainted(false);
         bConst.gridy = 1;
         buttonsLayout.add(play, bConst);
 
         // Botón siguiente jornada
-        JButton nextJourney = new JButton("Siguiente jornada");
+        Boton nextJourney = new Boton("Siguiente jornada", 3);
         nextJourney.setEnabled(false);
         nextJourney.setFocusPainted(false);
         bConst.gridy = 2;
         buttonsLayout.add(nextJourney, bConst);
 
         // Botón simulación completa
-        JButton completeSimulation = new JButton("Simulación completa");
+        Boton completeSimulation = new Boton("Simulación completa", 4);
         completeSimulation.setEnabled(false);
         completeSimulation.setFocusPainted(false);
         bConst.gridy = 3;
         buttonsLayout.add(completeSimulation, bConst);
 
         // Botón salir
-        JButton exit = new JButton("Salir");
+        Boton exit = new Boton("Salir", 0);
         exit.setFocusPainted(false);
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
         bConst.gridy = 5;
         buttonsLayout.add(exit, bConst);
 
@@ -105,5 +100,63 @@ public class Main {
 
         ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ventana.setVisible(true);
+    }
+
+    public static class Boton extends JButton implements ActionListener, MouseListener {
+        private final int function;
+        public Boton(String name, int function) {
+            super(name);
+            this.function = function;
+            this.addActionListener(this);
+            this.addMouseListener(this);
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch(this.function) {
+                case 0:
+                    System.exit(0);
+                    break;
+                case 1:
+                    System.out.println("Se ha creado una nueva liga.");
+                    break;
+                case 2:
+                    System.out.println("Al hacer click en este botón se simulará una liga al completo");
+                    break;
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            switch(this.function) {
+                case 3:
+                    JOptionPane.showMessageDialog(null, "Se va a proceder a simular una jornada");
+            }
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            switch(this.function) {
+                case 2:
+                    System.out.println("Al hacer click en este botón se simulará una liga al completo");
+                    break;
+            }
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
     }
 }
