@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
     public static void main(String[] args) {
@@ -60,6 +62,12 @@ public class Main {
         // Botón salir
         JButton exit = new JButton("Salir");
         exit.setFocusPainted(false);
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         bConst.gridy = 5;
         buttonsLayout.add(exit, bConst);
 
